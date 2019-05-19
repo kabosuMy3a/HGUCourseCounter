@@ -7,8 +7,8 @@ import java.util.TreeMap;
 
 import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
-import edu.handong.analysise.utils.NotEnoughArgumentException;
-import edu.handong.analysise.utils.Utils;
+import edu.handong.analysis.utils.NotEnoughArgumentException;
+import edu.handong.analysis.utils.Utils;
 
 public class HGUCoursePatternAnalyzer {
 
@@ -29,22 +29,33 @@ public class HGUCoursePatternAnalyzer {
 			System.out.println(e.getMessage());
 			System.exit(0);
 		}
-		
+
 		String dataPath = args[0]; // csv file to be analyzed
 		String resultPath = args[1]; // the file path where the results are saved.
 		ArrayList<String> lines = Utils.getLines(dataPath, true);
-		
-		students = loadStudentCourseRecords(lines);
+
+		//students = loadStudentCourseRecords(lines);
 		
 		// To sort HashMap entries by key values so that we can save the results by student ids in ascending order.
-		Map<String, Student> sortedStudents = new TreeMap<String,Student>(students); 
+		//Map<String, Student> sortedStudents = new TreeMap<String,Student>(students); 
 		
 		// Generate result lines to be saved.
-		ArrayList<String> linesToBeSaved = countNumberOfCoursesTakenInEachSemester(sortedStudents);
+		//ArrayList<String> linesToBeSaved = countNumberOfCoursesTakenInEachSemester(sortedStudents);
 		
 		// Write a file (named like the value of resultPath) with linesTobeSaved.
+	
+		/*
+		ArrayList<String> linesToBeSaved = new ArrayList<String>();
+		for(int i=0; i<100 ; i++){
+			linesToBeSaved.add("Sun "+ Integer.toString(i));
+		}
+		linesToBeSaved = lines ;
+		*/
+
 		Utils.writeAFile(linesToBeSaved, resultPath);
+
 	}
+
 	
 	/**
 	 * This method create HashMap<String,Student> from the data csv file. Key is a student id and the corresponding object is an instance of Student.

@@ -6,10 +6,17 @@
  * User Manual available at https://docs.gradle.org/5.3/userguide/java_library_plugin.html
  */
 
+
+
+
+
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
 }
+
+apply plugin : 'application'
+mainClassName = "edu.handong.analysis.Main"
 
 repositories {
     // Use jcenter for resolving your dependencies.
