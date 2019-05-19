@@ -13,7 +13,6 @@ import edu.handong.analysis.utils.Utils;
 public class HGUCoursePatternAnalyzer {
 
 	private HashMap<String,Student> students;
-	
 	/**
 	 * This method runs our analysis logic to save the number courses taken by each student per semester in a result file.
 	 * Run method must not be changed!!
@@ -34,23 +33,17 @@ public class HGUCoursePatternAnalyzer {
 		String resultPath = args[1]; // the file path where the results are saved.
 		ArrayList<String> lines = Utils.getLines(dataPath, true);
 
-		//students = loadStudentCourseRecords(lines);
+		students = loadStudentCourseRecords(lines);
 		
 		// To sort HashMap entries by key values so that we can save the results by student ids in ascending order.
-		//Map<String, Student> sortedStudents = new TreeMap<String,Student>(students); 
+		Map<String, Student> sortedStudents = new TreeMap<String,Student>(students); 
 		
 		// Generate result lines to be saved.
-		//ArrayList<String> linesToBeSaved = countNumberOfCoursesTakenInEachSemester(sortedStudents);
+		ArrayList<String> linesToBeSaved = countNumberOfCoursesTakenInEachSemester(sortedStudents);
+	
 		
 		// Write a file (named like the value of resultPath) with linesTobeSaved.
 	
-		/*
-		ArrayList<String> linesToBeSaved = new ArrayList<String>();
-		for(int i=0; i<100 ; i++){
-			linesToBeSaved.add("Sun "+ Integer.toString(i));
-		}
-		linesToBeSaved = lines ;
-		*/
 
 		Utils.writeAFile(linesToBeSaved, resultPath);
 
@@ -65,9 +58,29 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private HashMap<String,Student> loadStudentCourseRecords(ArrayList<String> lines) {
 		
-		// TODO: Implement this method
-		
-		return null; // do not forget to return a proper variable.
+		HashMap<String,Student> students = new HashMap<String,Student>(); 
+
+		for(String line : lines){
+
+			String[] temp = line.split(",");
+			String Id = temp[0].trim() ;
+			Student student ;
+			if(!students.containsKey(Id)){
+
+				student = new Student(Id) ;
+				//students.put(Id,student);  //if call by reference only this is okay
+			}
+			else{
+				student = students.get(Id);
+			}
+
+			Course course = new Course(line) ;
+			student.addCourse(course) ;
+			students.put(Id,student);//if java is call by value, it's0 collect
+
+		}
+
+		return students; // do not forget to return a proper variable.
 	}
 
 	/**
@@ -85,8 +98,20 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private ArrayList<String> countNumberOfCoursesTakenInEachSemester(Map<String, Student> sortedStudents) {
 		
-		// TODO: Implement this method
-		
-		return null; // do not forget to return a proper variable.
+		ArrayList<String> personalInfo = new ArrayList<String>() ;
+		ArrayList<String> peopleInfo = new ArrayList<String>() ;
+		HashMap<String,Integer> dummy = null;
+		for(String Id : sortedStudents.keySet()){
+			
+			Student student = sortedStudents.get(Id);
+			//dummy = student.getSemesterByYearAndSemester();
+			personalInfo = student.makePersonalInfo();
+			
+			for(String line : personalInfo){
+				peopleInfo.add(line) ;
+			}
+		}
+
+		return peopleInfo; // do not forget to return a proper variable.
 	}
 }

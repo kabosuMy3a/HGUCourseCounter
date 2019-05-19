@@ -49,9 +49,16 @@ public class Utils {
 		try{
 			File file = new File(targetFileName) ;	
 			if (!file.exists()) file.getParentFile().mkdirs();
+			
+			if(!file.exists()){
+				outputStream = new PrintWriter(targetFileName);
+			}
 
-			outputStream = new PrintWriter(targetFileName);
-		
+			else{
+				FileWriter filewriter = new FileWriter(targetFileName, true);
+				outputStream = new PrintWriter(filewriter);
+
+			}
 
 		}
 
