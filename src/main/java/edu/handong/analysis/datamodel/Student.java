@@ -2,6 +2,7 @@ package edu.handong.analysis.datamodel;
 
 import java.util.* ;
 import java.io.* ;
+import com.google.common.collect.*;
 
 public class Student{
 
@@ -54,14 +55,14 @@ public class Student{
 		
 		}
 
-
 		
 
 	}
 
 
 	public int getNumCourseInNthSemester(int semester){
-	
+
+
 		int count =0;
 		
 		if (semesterByYearAndSemester.isEmpty()){
@@ -74,21 +75,17 @@ public class Student{
 
 			System.out.println("you input wrong semester. this person graduated earlier. ");
 			return 0x0;
-		}	
+		}
 
+		BiMap<String, Integer> biMap = HashBiMap.create(semesterByYearAndSemester);	
 		String key = new String();
-		int index = 0 ;
-		Map<String, Integer> sortedMap = new TreeMap<String,Integer>(semesterByYearAndSemester);
-		for(String temp : sortedMap.keySet()){
-	
-			//index ++ ;
 
-			if(++index == semester){
+		for(int yourSemester : biMap.inverse().keySet()){
 
-				key = temp ;
-				break; 			
-			}			
-		}	
+			if(yourSemester == semester) key = biMap.inverse().get(yourSemester);	
+
+		}
+		
 
 		if(coursesTaken.isEmpty()){
 			System.out.println("you don't have courses data");
@@ -111,7 +108,6 @@ public class Student{
 		
 		getSemestersByYearAndSemester();
 		Map<String, Integer> sortedMap = new TreeMap<String,Integer>(semesterByYearAndSemester);
-		//System.out.println(sortedMap);
 		ArrayList<String> personalInfo = new ArrayList<String>();
 		
 		String semesterInfo = new String();

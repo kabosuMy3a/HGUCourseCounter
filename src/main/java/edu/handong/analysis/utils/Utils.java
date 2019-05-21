@@ -48,8 +48,13 @@ public class Utils {
 
 		try{
 			File file = new File(targetFileName) ;	
-			if (!file.exists()) file.getParentFile().mkdirs();
-			
+			File abFile = file.getAbsoluteFile();
+
+			if(!abFile.getParentFile().exists()){
+					abFile.getParentFile().mkdirs();
+			}
+
+
 			if(!file.exists()){
 				outputStream = new PrintWriter(targetFileName);
 			}

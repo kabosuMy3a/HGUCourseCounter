@@ -21,10 +21,11 @@ public class Course{
 
 		if (line == null) System.exit(0);
 		ArrayList<String> splitedLines = null;
-
+		
 		try{
 			String[] temp = line.split(",") ;
 			splitedLines = new ArrayList<String>(Arrays.asList(temp));
+			
 			if(splitedLines.size() != 9) throw new failedSplitException() ;
 
 		}catch (failedSplitException e){
