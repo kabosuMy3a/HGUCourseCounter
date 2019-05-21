@@ -7,17 +7,17 @@ public class Student{
 
 	
 	private String studentID ;
-	private ArrayList<Course> coursesTaken = new ArrayList<Course>() ;
-	private HashMap<String,Integer> semesterByYearAndSemester = new HashMap<String,Integer>() ; 
+	private ArrayList<Course> coursesTaken ;
+	private HashMap<String,Integer> semesterByYearAndSemester ; 
 	//2003-1 is 3rd semester for him.
 	
 	public Student(String studentID){
 
 		this.studentID = studentID ;
 		
-		//ArrayList<Course> coursesTaken = new ArrayList<Course>(); 질문 1. 
+		coursesTaken = new ArrayList<Course>(); //질문 1. 
 		
-		//semesterByYearAndSemester = new HashMap<String,Integer>() ;
+		semesterByYearAndSemester = new HashMap<String,Integer>() ;
 		
 	}
 
@@ -31,6 +31,8 @@ public class Student{
 	public void getSemestersByYearAndSemester(){
 
 		int[] yearAndSemester = new int[2];
+		TreeSet<String> yas = new TreeSet<String>() ;
+		
 
 		if (coursesTaken.isEmpty()){
 			System.out.println("coursesTaken is Empty");
@@ -38,18 +40,21 @@ public class Student{
 		}
 
 		for(Course course : coursesTaken){
-
+		
 			yearAndSemester = course.parseYearSemester();
-			String yas =Integer.toString(yearAndSemester[0])+ "-" +Integer.toString(yearAndSemester[1]) ;  
-			if(!semesterByYearAndSemester.containsKey(yas)){
-				semesterByYearAndSemester.put(yas,semesterByYearAndSemester.size()+1) ;
+			yas.add(Integer.toString(yearAndSemester[0])+ "-" +Integer.toString(yearAndSemester[1])) ;
 
-			};
-
-				
 		}
 
-		 
+		int index = 0 ;
+
+		for(String key : yas){
+
+			semesterByYearAndSemester.put(key,++index) ;
+		
+		}
+
+
 		
 
 	}

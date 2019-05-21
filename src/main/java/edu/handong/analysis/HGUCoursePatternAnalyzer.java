@@ -68,7 +68,7 @@ public class HGUCoursePatternAnalyzer {
 			if(!students.containsKey(Id)){
 
 				student = new Student(Id) ;
-				//students.put(Id,student);  //if call by reference only this is okay
+				students.put(Id,student);  //if call by reference only this is okay
 			}
 			else{
 				student = students.get(Id);
@@ -76,7 +76,7 @@ public class HGUCoursePatternAnalyzer {
 
 			Course course = new Course(line) ;
 			student.addCourse(course) ;
-			students.put(Id,student);//if java is call by value, it's0 collect
+			//students.put(Id,student);//if java is call by value, it's0 collect
 
 		}
 
@@ -100,11 +100,9 @@ public class HGUCoursePatternAnalyzer {
 		
 		ArrayList<String> personalInfo = new ArrayList<String>() ;
 		ArrayList<String> peopleInfo = new ArrayList<String>() ;
-		HashMap<String,Integer> dummy = null;
 		for(String Id : sortedStudents.keySet()){
 			
 			Student student = sortedStudents.get(Id);
-			//dummy = student.getSemesterByYearAndSemester();
 			personalInfo = student.makePersonalInfo();
 			
 			for(String line : personalInfo){
