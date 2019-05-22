@@ -69,7 +69,7 @@ public class Utils {
 
 		catch(FileNotFoundException e){
 
-			System.out.println("Wrong Coding you did when you implement writeAFile");
+			System.out.println("The file path does not exist. Please check your CLI argument!");
 			System.exit(0); 
 		}
 		
