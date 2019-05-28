@@ -23,8 +23,9 @@ public class Student{
 	}
 
 	public void addCourse(Course newRecord){
-
-		coursesTaken.add(newRecord) ;
+		
+		if (newRecord.exists())	coursesTaken.add(newRecord) ;
+		else System.out.println("course is not exist");
 
 	}
 
@@ -104,7 +105,7 @@ public class Student{
 		return count ;
 	}
 
-	public ArrayList<String> makePersonalInfo(){
+	public ArrayList<String> makePersonalInfo(int startYear, int endYear){
 		
 		getSemestersByYearAndSemester();
 		Map<String, Integer> sortedMap = new TreeMap<String,Integer>(semesterByYearAndSemester);
@@ -116,6 +117,9 @@ public class Student{
 			
 			int yourSemester = sortedMap.get(semester) ;
 			
+			int year = Integer.parseInt(semester.substring(0,4));
+			if(year < startYear || year > endYear) continue;
+			
 			semesterInfo = studentID+","+
 				Integer.toString(sortedMap.size())+","+
 				Integer.toString(yourSemester)+","+
@@ -126,5 +130,13 @@ public class Student{
 		}
 
 		return personalInfo; 
+	}
+
+	public boolean checkedRegister(String YAS){
+	
+			getSemestersByYearAndSemester();
+			if(semesterByYearAndSemester.keySet().contains(YAS)) return true;
+			else return false;
+
 	}
 }
