@@ -64,8 +64,12 @@ public class HGUCoursePatternAnalyzer {
 		}
 		
 		students = loadStudentCourseRecords(parseData);
+		for(String id : students.keySet()){
+			students.get(id).getSemestersByYearAndSemester();
+		}
 		// To sort HashMap entries by key values so that we can save the results by student ids in ascending order.
 		Map<String, Student> sortedStudents = new TreeMap<String,Student>(students); 
+		
 		ArrayList<String> linesToBeSaved ;
 
 		if(analysisOption == 1){

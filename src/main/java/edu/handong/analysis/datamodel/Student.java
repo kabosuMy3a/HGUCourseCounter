@@ -107,7 +107,7 @@ public class Student{
 
 	public ArrayList<String> makePersonalInfo(int startYear, int endYear){
 		
-		getSemestersByYearAndSemester();
+		//getSemestersByYearAndSemester();
 		Map<String, Integer> sortedMap = new TreeMap<String,Integer>(semesterByYearAndSemester);
 		ArrayList<String> personalInfo = new ArrayList<String>();
 		
@@ -134,7 +134,7 @@ public class Student{
 
 	public boolean checkedRegister(String YAS){
 	
-			getSemestersByYearAndSemester();
+			//getSemestersByYearAndSemester();
 			if(semesterByYearAndSemester.keySet().contains(YAS)) return true;
 			else return false;
 
