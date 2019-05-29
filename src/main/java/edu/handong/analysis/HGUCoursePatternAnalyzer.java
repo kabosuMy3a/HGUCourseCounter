@@ -192,7 +192,7 @@ public class HGUCoursePatternAnalyzer {
 		ArrayList<String> courseInfoToString = new ArrayList<String>();
 		Map<String,Integer[]> sortedCourseInfo = new TreeMap<String,Integer[]>(courseInfo);
 		
-		courseInfoToString.add("Year,Semester,CouseCode, CourseName,TotalStudents,StudentsTaken,Rate");
+		courseInfoToString.add("Year,Semester,CouseCode,CourseName,TotalStudents,StudentsTaken,Rate");
 		for(String key : sortedCourseInfo.keySet()){
 
 			int totalStudents = sortedCourseInfo.get(key)[0] ;
